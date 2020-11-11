@@ -12,12 +12,43 @@
 
 <script>
 export default {
-    props: [
-        "name",
-        "phoneNumber",
-        "emailAddress",
-        "isFavorite"
-    ],
+    // First way
+    // props: [
+    //     "name",
+    //     "phoneNumber",
+    //     "emailAddress",
+    //     "isFavorite"
+    // ],
+    // Second way
+    // props: {
+    //     name: String,
+    //     phoneNumber: String,
+    //     emailAddress: String,
+    //     isFavorite: String,
+    // },
+    // Thrid way
+    props: {
+        name: {
+            type: String,
+            required: true
+        },
+        phoneNumber: {
+            type: String,
+            required: true
+        },
+        emailAddress: {
+            type: String,
+            required: true
+        },
+        isFavorite: {
+            type: String,
+            required: false,
+            default: '0',
+            validator: function(value){
+                return value === '1' || value === '0';
+            }
+        },
+    },
     data(){
         return{
             detailsAreVisible: false,

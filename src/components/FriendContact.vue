@@ -1,6 +1,6 @@
 <template>
 <li>
-    <h2>{{ name }} {{ friendIsFavorite ? "(Favorite)" : ""  }} </h2>
+    <h2>{{ name }} {{ isFavorite ? "(Favorite)" : ""  }} </h2>
     <button @click="toggleDetails">{{ detailsAreVisible ? 'Hide' : 'Show' }} Details</button>
     <button @click="toggleFavorit">Favorite</button>
     <ul v-if="detailsAreVisible">
@@ -28,6 +28,10 @@ export default {
     // },
     // Thrid way
     props: {
+        id: {
+            type: String,
+            required: true
+        },
         name: {
             type: String,
             required: true
@@ -51,8 +55,7 @@ export default {
     },
     data(){
         return{
-            detailsAreVisible: false,
-            friendIsFavorite: this.isFavorite
+            detailsAreVisible: false
         }
     },
     computed: {
@@ -65,7 +68,7 @@ export default {
             this.detailsAreVisible = !this.detailsAreVisible;
         },
         toggleFavorit(){
-            this.friendIsFavorite = !this.friendIsFavorite;
+            this.$emit('toggle-favorite', this.id);
         }
     }
 };
